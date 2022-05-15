@@ -1,0 +1,104 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwluskcorpj35"]
+
+[ext_resource type="Texture2D" uid="uid://8xb40ayn12is" path="res://tile.PNG" id="1_w5vsn"]
+[ext_resource type="Script" path="res://tile_map.gd" id="2_2lnwo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_112h3"]
+resource_name = "dead"
+texture = ExtResource( "1_w5vsn" )
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10w07"]
+resource_name = "alive"
+texture = ExtResource( "1_w5vsn" )
+0:0/0 = 0
+0:0/0/modulate = Color(0, 0.882353, 1, 1)
+
+[sub_resource type="TileSet" id="TileSet_f38wl"]
+sources/0 = SubResource( "TileSetAtlasSource_112h3" )
+sources/1 = SubResource( "TileSetAtlasSource_10w07" )
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource( "TileSet_f38wl" )
+format = 2
+script = ExtResource( "2_2lnwo" )
+height = 96
+width = 54
+resolution = Vector2(1920, 1280)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_bottom = 60.0
+color = Color(0.360784, 0.360784, 0.360784, 1)
+
+[node name="StopLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -78.0
+offset_right = 78.0
+offset_bottom = 26.0
+text = "Press 'space' to stop"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_bottom = 56.0
+theme_override_constants/separation = 24
+alignment = 2
+
+[node name="GenerationVBox" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+offset_right = 88.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/GenerationVBox"]
+offset_right = 88.0
+offset_bottom = 26.0
+text = "Generation"
+horizontal_alignment = 1
+
+[node name="GenerationLabel" type="Label" parent="CanvasLayer/HBoxContainer/GenerationVBox"]
+offset_top = 30.0
+offset_right = 88.0
+offset_bottom = 56.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Lifespan" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+offset_left = 112.0
+offset_right = 212.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Lifespan"]
+offset_right = 100.0
+offset_bottom = 26.0
+text = "Lifespan"
+horizontal_alignment = 1
+
+[node name="LifespanSlider" type="HSlider" parent="CanvasLayer/HBoxContainer/Lifespan"]
+minimum_size = Vector2(100, 0)
+offset_top = 30.0
+offset_right = 100.0
+offset_bottom = 46.0
+min_value = 10.0
+value = 60.0
+
+[node name="StartButton" type="Button" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = -31.0
+offset_right = 23.0
+text = "Start"
+
+[connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
