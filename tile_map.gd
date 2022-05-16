@@ -9,9 +9,9 @@ const TILE_SIZE = 16
 @onready var camera = $Camera2D
 @onready var start_button = $CanvasLayer/StartButton
 @onready var stop_label = $CanvasLayer/StopLabel
-@onready var lifespan_slider = $CanvasLayer/HBoxContainer/Lifespan/LifespanSlider
-@onready var generation_label = $CanvasLayer/HBoxContainer/GenerationVBox/GenerationLabel
-@onready var population_label = $CanvasLayer/HBoxContainer/PopulationVBox/PopulationLabel
+@onready var lifespan_slider = $CanvasLayer/Stats/Lifespan/LifespanSlider
+@onready var generation_label = $CanvasLayer/Stats/GenerationVBox/GenerationLabel
+@onready var population_label = $CanvasLayer/Stats/PopulationVBox/PopulationLabel
 @onready var info_label = $CanvasLayer/InfoLabel
 
 var is_simulating = false
@@ -106,11 +106,12 @@ func _on_start_button_pressed():
 
 
 func _on_patterns_button_mouse_entered():
-	pass # Replace with function body.
+	set_layer_enabled(1, true)
 
 
 func _on_button_mouse_exited():
 	info_label.visible = false
+	set_layer_enabled(1, false)
 
 
 func _on_info_button_mouse_entered():

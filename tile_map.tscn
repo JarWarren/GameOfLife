@@ -1,26 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwluskcorpj35"]
+[gd_scene load_steps=3 format=3 uid="uid://cwluskcorpj35"]
 
-[ext_resource type="Texture2D" uid="uid://8xb40ayn12is" path="res://tile.PNG" id="1_w5vsn"]
+[ext_resource type="TileSet" uid="uid://c3liw2wpi35ny" path="res://tile_map.tres" id="1_md28y"]
 [ext_resource type="Script" path="res://tile_map.gd" id="2_2lnwo"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_112h3"]
-resource_name = "dead"
-texture = ExtResource( "1_w5vsn" )
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10w07"]
-resource_name = "alive"
-texture = ExtResource( "1_w5vsn" )
-0:0/0 = 0
-0:0/0/modulate = Color(0, 0.882353, 1, 1)
-
-[sub_resource type="TileSet" id="TileSet_f38wl"]
-sources/0 = SubResource( "TileSetAtlasSource_112h3" )
-sources/1 = SubResource( "TileSetAtlasSource_10w07" )
-
 [node name="TileMap" type="TileMap"]
-tile_set = SubResource( "TileSet_f38wl" )
+tile_set = ExtResource( "1_md28y" )
 format = 2
+layer_0/name = "primary"
+layer_1/name = "pattern"
+layer_1/enabled = false
+layer_1/modulate = Color(1, 0, 0.0666667, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array(1310721, 0, 0, 1376257, 0, 0, 1572865, 0, 0, 1310722, 0, 0, 1507330, 0, 0, 1310723, 0, 0, 1507331, 0, 0, 1572867, 0, 0, 2293763, 0, 0, 1441796, 0, 0, 2162692, 0, 0, 2293764, 0, 0, 1310725, 0, 0, 1441797, 0, 0, 1507333, 0, 0, 1572869, 0, 0, 2228230, 0, 0, 2293767, 0, 0, 2293768, 0, 0, 2293769, 0, 0, 196621, 0, 0, 524301, 0, 0, 65550, 0, 0, 131086, 0, 0, 262158, 0, 0, 327694, 0, 0, 393230, 0, 0, 458766, 0, 0, 589838, 0, 0, 655374, 0, 0, 196623, 0, 0, 524303, 0, 0, 1114135, 0, 0, 1179671, 0, 0, 786456, 0, 0, 851992, 0, 0, 1114136, 0, 0, 1179672, 0, 0, 1245208, 0, 0, 1441816, 0, 0, 1507352, 0, 0, 786457, 0, 0, 851993, 0, 0, 917529, 0, 0, 1114137, 0, 0, 1179673, 0, 0, 1245209, 0, 0, 1441817, 0, 0, 1507353, 0, 0, 1572889, 0, 0, 720922, 0, 0, 851994, 0, 0, 917530, 0, 0, 1048602, 0, 0, 1179674, 0, 0, 1245210, 0, 0, 1441818, 0, 0, 1507354, 0, 0, 1572890, 0, 0, 720923, 0, 0, 786459, 0, 0, 851995, 0, 0, 1048603, 0, 0, 1114139, 0, 0, 1179675, 0, 0, 1441819, 0, 0, 1507355, 0, 0, 1572891, 0, 0, 786460, 0, 0, 1114140, 0, 0, 1376284, 0, 0, 1507356, 0, 0, 1572892, 0, 0, 1376285, 0, 0, 1441821, 0, 0, 1507357, 0, 0, 196638, 0, 0, 1441822, 0, 0, 1900574, 0, 0, 1966110, 0, 0, 131103, 0, 0, 196639, 0, 0, 1900575, 0, 0, 1966111, 0, 0, 131104, 0, 0, 196640, 0, 0, 2031648, 0, 0, 2097184, 0, 0, 131105, 0, 0, 917537, 0, 0, 2031649, 0, 0, 2097185, 0, 0, 786466, 0, 0, 917538, 0, 0, 852003, 0, 0, 917539, 0, 0, 1507364, 0, 0, 1441829, 0, 0, 1507365, 0, 0, 1572901, 0, 0, 1441830, 0, 0, 2228276, 0, 0, 2228277, 0, 0, 2293813, 0, 0, 1310775, 0, 0, 1245241, 0, 0, 1310777, 0, 0, 2293817, 0, 0, 2162746, 0, 0, 2293818, 0, 0, 1048635, 0, 0, 1114171, 0, 0, 1179707, 0, 0, 2293819, 0, 0, 983101, 0, 0, 1048637, 0, 0, 1114173, 0, 0, 1048638, 0, 0)
 script = ExtResource( "2_2lnwo" )
 height = 96
 width = 54
@@ -30,7 +23,7 @@ resolution = Vector2(1920, 1280)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="StatsColorRect" type="ColorRect" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -331.0
@@ -47,7 +40,7 @@ offset_bottom = 26.0
 text = "Press 'space' to stop"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="Stats" type="HBoxContainer" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -324.0
@@ -55,59 +48,59 @@ offset_bottom = 56.0
 theme_override_constants/separation = 24
 alignment = 2
 
-[node name="GenerationVBox" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="GenerationVBox" type="VBoxContainer" parent="CanvasLayer/Stats"]
 offset_left = 3.0
 offset_right = 91.0
 offset_bottom = 56.0
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/GenerationVBox"]
+[node name="Label" type="Label" parent="CanvasLayer/Stats/GenerationVBox"]
 offset_right = 88.0
 offset_bottom = 26.0
 text = "Generation"
 horizontal_alignment = 1
 
-[node name="GenerationLabel" type="Label" parent="CanvasLayer/HBoxContainer/GenerationVBox"]
+[node name="GenerationLabel" type="Label" parent="CanvasLayer/Stats/GenerationVBox"]
 offset_top = 30.0
 offset_right = 88.0
 offset_bottom = 56.0
 text = "0"
 horizontal_alignment = 1
 
-[node name="PopulationVBox" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="PopulationVBox" type="VBoxContainer" parent="CanvasLayer/Stats"]
 offset_left = 115.0
 offset_right = 200.0
 offset_bottom = 56.0
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/PopulationVBox"]
+[node name="Label" type="Label" parent="CanvasLayer/Stats/PopulationVBox"]
 offset_right = 85.0
 offset_bottom = 26.0
 text = "Population"
 horizontal_alignment = 1
 
-[node name="PopulationLabel" type="Label" parent="CanvasLayer/HBoxContainer/PopulationVBox"]
+[node name="PopulationLabel" type="Label" parent="CanvasLayer/Stats/PopulationVBox"]
 offset_top = 30.0
 offset_right = 85.0
 offset_bottom = 56.0
 text = "0"
 horizontal_alignment = 1
 
-[node name="Lifespan" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="Lifespan" type="VBoxContainer" parent="CanvasLayer/Stats"]
 offset_left = 224.0
 offset_right = 324.0
 offset_bottom = 56.0
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Lifespan"]
+[node name="Label" type="Label" parent="CanvasLayer/Stats/Lifespan"]
 offset_right = 100.0
 offset_bottom = 26.0
 text = "Lifespan"
 horizontal_alignment = 1
 
-[node name="LifespanSlider" type="HSlider" parent="CanvasLayer/HBoxContainer/Lifespan"]
+[node name="LifespanSlider" type="HSlider" parent="CanvasLayer/Stats/Lifespan"]
 minimum_size = Vector2(100, 0)
 offset_top = 30.0
 offset_right = 100.0
 offset_bottom = 46.0
-min_value = 10.0
+min_value = 1.0
 value = 60.0
 
 [node name="StartButton" type="Button" parent="CanvasLayer"]
@@ -138,17 +131,17 @@ The outcome is determined by how you set up the board.
 3. All other cells die by overpopulation or underpopulation."
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Hover" type="VBoxContainer" parent="."]
 offset_right = 8.0
 offset_bottom = 31.0
 
-[node name="InfoButton" type="Button" parent="VBoxContainer"]
+[node name="InfoButton" type="Button" parent="Hover"]
 offset_right = 74.0
 offset_bottom = 31.0
 focus_mode = 0
 text = "info"
 
-[node name="PatternsButton" type="Button" parent="VBoxContainer"]
+[node name="PatternsButton" type="Button" parent="Hover"]
 offset_top = 35.0
 offset_right = 74.0
 offset_bottom = 66.0
@@ -156,7 +149,7 @@ focus_mode = 0
 text = "patterns"
 
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/InfoButton" to="." method="_on_info_button_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/InfoButton" to="." method="_on_button_mouse_exited"]
-[connection signal="mouse_entered" from="VBoxContainer/PatternsButton" to="." method="_on_patterns_button_mouse_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/PatternsButton" to="." method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Hover/InfoButton" to="." method="_on_info_button_mouse_entered"]
+[connection signal="mouse_exited" from="Hover/InfoButton" to="." method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="Hover/PatternsButton" to="." method="_on_patterns_button_mouse_entered"]
+[connection signal="mouse_exited" from="Hover/PatternsButton" to="." method="_on_button_mouse_exited"]
