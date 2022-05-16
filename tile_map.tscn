@@ -33,7 +33,7 @@ resolution = Vector2(1920, 1280)
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -220.0
+offset_left = -331.0
 offset_bottom = 60.0
 color = Color(0.360784, 0.360784, 0.360784, 1)
 
@@ -50,13 +50,14 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -212.0
+offset_left = -324.0
 offset_bottom = 56.0
 theme_override_constants/separation = 24
 alignment = 2
 
 [node name="GenerationVBox" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
-offset_right = 88.0
+offset_left = 3.0
+offset_right = 91.0
 offset_bottom = 56.0
 
 [node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/GenerationVBox"]
@@ -72,9 +73,27 @@ offset_bottom = 56.0
 text = "0"
 horizontal_alignment = 1
 
+[node name="PopulationVBox" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+offset_left = 115.0
+offset_right = 200.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/PopulationVBox"]
+offset_right = 85.0
+offset_bottom = 26.0
+text = "Population"
+horizontal_alignment = 1
+
+[node name="PopulationLabel" type="Label" parent="CanvasLayer/HBoxContainer/PopulationVBox"]
+offset_top = 30.0
+offset_right = 85.0
+offset_bottom = 56.0
+text = "0"
+horizontal_alignment = 1
+
 [node name="Lifespan" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
-offset_left = 112.0
-offset_right = 212.0
+offset_left = 224.0
+offset_right = 324.0
 offset_bottom = 56.0
 
 [node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/Lifespan"]
@@ -101,4 +120,43 @@ offset_top = -31.0
 offset_right = 23.0
 text = "Start"
 
+[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = -78.0
+offset_right = 396.0
+offset_bottom = 78.0
+text = "Conway's Game of Life is a zero-player game.
+The outcome is determined by how you set up the board.
+
+1. Live cells with 2 or 3 neighbors survive to the next round.
+2. Dead cells with exactly 3 neighbors are born alive the next round.
+3. All other cells die by overpopulation or underpopulation."
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 8.0
+offset_bottom = 31.0
+
+[node name="InfoButton" type="Button" parent="VBoxContainer"]
+offset_right = 74.0
+offset_bottom = 31.0
+focus_mode = 0
+text = "info"
+
+[node name="PatternsButton" type="Button" parent="VBoxContainer"]
+offset_top = 35.0
+offset_right = 74.0
+offset_bottom = 66.0
+focus_mode = 0
+text = "patterns"
+
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/InfoButton" to="." method="_on_info_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/InfoButton" to="." method="_on_button_mouse_exited"]
+[connection signal="mouse_entered" from="VBoxContainer/PatternsButton" to="." method="_on_patterns_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/PatternsButton" to="." method="_on_button_mouse_exited"]
