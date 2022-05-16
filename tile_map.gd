@@ -9,13 +9,16 @@ const TILE_SIZE = 16
 @onready var camera = $Camera2D
 @onready var start_button = $CanvasLayer/StartButton
 @onready var stop_label = $CanvasLayer/StopLabel
-@onready var lifespan_slider = $CanvasLayer/HBoxContainer/Lifespan/LifespanSlider
-@onready var generation_label = $CanvasLayer/HBoxContainer/GenerationVBox/GenerationLabel
+@onready var lifespan_slider = $CanvasLayer/Stats/Lifespan/LifespanSlider
+@onready var generation_label = $CanvasLayer/Stats/GenerationVBox/GenerationLabel
+@onready var population_label = $CanvasLayer/Stats/PopulationVBox/PopulationLabel
+@onready var info_label = $CanvasLayer/InfoLabel
 
 var is_simulating = false
 var _time: int
 var _next_generation = []
-var generation_number = 0
+var _generation_number = 0
+var _population = 0
 
 func _ready():
 	_time = lifespan_slider.value
@@ -35,9 +38,12 @@ func _process(_delta):
 		var click_coordinate = (get_global_mouse_position() / TILE_SIZE).floor()
 		var id = get_cell_source_id(0, click_coordinate, false)
 		_set_cell(click_coordinate.x, click_coordinate.y, 1 - id)
+		_population += 1 if id == 0 else -1
 	if Input.is_action_just_pressed("ui_accept"):
 		_reset()
-	if !is_simulating: return
+	if !is_simulating: 
+		population_label.text = "%d" % _population
+		return
 	_time -= 1
 	if _time <= 0:
 		_time = lifespan_slider.value
@@ -45,6 +51,7 @@ func _process(_delta):
 
 
 func _new_generation():
+	_population = 0
 	for row in range(height):
 		for column in range(width):
 			var live_neighbors = 0
@@ -63,18 +70,21 @@ func _new_generation():
 					live_neighbors += 1
 			if get_cell_source_id(0, Vector2(column, row), false) == 1:
 				if live_neighbors in [2, 3]:
+					_population += 1
 					_next_generation[row][column] = 1
 				else:
 					_next_generation[row][column] = 0
 			elif live_neighbors == 3:
+				_population += 1
 				_next_generation[row][column] = 1
 			else:
 				_next_generation[row][column] = 0
 	for row in range(height):
 		for column in range(width):
 			_set_cell(column, row, _next_generation[row][column])
-	generation_number += 1
-	generation_label.text = "%d" % generation_number
+	_generation_number += 1
+	generation_label.text = "%d" % _generation_number
+	population_label.text = "%d" % _population
 
 
 func _set_cell(column: int, row: int, id: int):
@@ -85,7 +95,7 @@ func _reset():
 	is_simulating = false
 	start_button.visible = true
 	stop_label.visible = false
-	generation_number = 0
+	_generation_number = 0
 
 
 func _on_start_button_pressed():
@@ -93,3 +103,16 @@ func _on_start_button_pressed():
 	stop_label.visible = true
 	generation_label.text = "0"
 	is_simulating = true
+
+
+func _on_patterns_button_mouse_entered():
+	set_layer_enabled(1, true)
+
+
+func _on_button_mouse_exited():
+	info_label.visible = false
+	set_layer_enabled(1, false)
+
+
+func _on_info_button_mouse_entered():
+	info_label.visible = true
