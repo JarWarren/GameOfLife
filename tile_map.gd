@@ -40,7 +40,10 @@ func _process(_delta):
 		_set_cell(click_coordinate.x, click_coordinate.y, 1 - id)
 		_population += 1 if id == 0 else -1
 	if Input.is_action_just_pressed("ui_accept"):
-		_reset()
+		if is_simulating:
+			_reset()
+		else:
+			_on_start_button_pressed()
 	if !is_simulating: 
 		population_label.text = "%d" % _population
 		return

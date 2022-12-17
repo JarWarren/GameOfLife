@@ -4,15 +4,15 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_112h3"]
 resource_name = "dead"
-texture = ExtResource( "1_nmnty" )
+texture = ExtResource("1_nmnty")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10w07"]
 resource_name = "alive"
-texture = ExtResource( "1_nmnty" )
+texture = ExtResource("1_nmnty")
 0:0/0 = 0
 0:0/0/modulate = Color(0, 0.882353, 1, 1)
 
 [resource]
-sources/0 = SubResource( "TileSetAtlasSource_112h3" )
-sources/1 = SubResource( "TileSetAtlasSource_10w07" )
+sources/0 = SubResource("TileSetAtlasSource_112h3")
+sources/1 = SubResource("TileSetAtlasSource_10w07")
